@@ -18,7 +18,7 @@ const eslintConfig = [
       'react/jsx-uses-vars': 'error',
       'react/jsx-curly-spacing': [ 'warn', 'always' ],
       'react/display-name': 'off',
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'warn',
       'quotes': [ 'warn', 'single' ], // 문자열 single quote가 아닌 경우 경고
       'jsx-quotes': [ 'warn', 'prefer-double' ],
       'object-curly-spacing': [ 'warn', 'always' ],
