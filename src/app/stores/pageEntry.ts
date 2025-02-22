@@ -1,4 +1,4 @@
-import { createStore } from 'zustand';
+import { create } from 'zustand';
 
 export type PageEntryState = {
   entryTime: Date | null; // 사용자가 페이지에 진입한 시간을 저장
@@ -17,10 +17,8 @@ export const defaultPageEntryState: PageEntryState = {
   isInitialized: true // 초기 상태에서 페이지는 초기화되지 않음
 };
 
-export const createPageEntryStore = (initialState: PageEntryState = defaultPageEntryState) => {
-  return createStore<PageEntryStore>((set) => ({
-    ...initialState,
-    setEntryTime: (time) => set({ entryTime: time }),
-    setIsInitialized: (isInitialized) => set({ isInitialized })
-  }));
-};
+export const usePageEntryStore = create<PageEntryStore>((set) => ({
+  ...defaultPageEntryState,
+  setEntryTime: (time) => set({ entryTime: time }),
+  setIsInitialized: (isInitialized) => set({ isInitialized })
+}));
