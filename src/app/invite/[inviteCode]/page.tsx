@@ -1,4 +1,4 @@
-import Container from '@/app/components/Container';
+import Container from '@/components/Container';
 
 export default async function InvitePage({ params }: { params: Promise<{ inviteCode: string }> }) {
   const inviteCode = (await params).inviteCode; // 초대 코드
