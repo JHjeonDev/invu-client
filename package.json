@@ -8,13 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "bench": "vitest bench"
+    "bench": "vitest bench",
+    "test:build": "vitest run && next build"
   },
   "dependencies": {
     "next": "15.1.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "zustand": "^5.0.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
