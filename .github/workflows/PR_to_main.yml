@@ -44,7 +44,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=devs32
-            -Dsonar.organization=Devs32_invu-server
+            -Dsonar.organization=devs32
+            -Dsonar.projectKey=Devs32_invu-server
             -Dsonar.sources=./src 
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
