@@ -36,6 +36,16 @@ jobs:
         run: |
           npm run test -- --coverage
 
+      - name: Display folder structure
+        run: |
+          echo "Workspace root structure:"
+          ls -R
+          echo "Contents of src folder:"
+          ls -R ./src || echo "No src folder found"
+          echo "Contents of coverage folder:"
+          ls -R ./coverage || echo "No coverage folder found"
+      
+
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
