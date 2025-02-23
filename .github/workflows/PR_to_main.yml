@@ -35,7 +35,6 @@ jobs:
       - name: Run tests and generate coverage
         run: |
           npm run test -- --coverage
-          mkdir -p coverage
 
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
@@ -46,5 +45,5 @@ jobs:
           args: >
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-server
-            -Dsonar.sources=./src/src 
-            -Dsonar.javascript.lcov.reportPaths=./src/coverage/lcov.info
+            -Dsonar.sources=./src 
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
