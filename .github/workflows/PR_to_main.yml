@@ -38,6 +38,7 @@ jobs:
 
       # 5.1 LCOV 경로 수정
       - name: Adjust lcov.info file paths for SonarCloud
+        working-directory: ./coverage
         run: |
           sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' ./coverage/lcov.info
 
