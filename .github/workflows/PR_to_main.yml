@@ -20,12 +20,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "21" # 원하는 Node.js 버전
+          node-version: "21"
           cache: npm
 
       # 3. 의존성 설치
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       # 4. 빌드 실행
       - name: Build application
@@ -41,7 +41,7 @@ jobs:
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarCloud API 토큰
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=devs32
