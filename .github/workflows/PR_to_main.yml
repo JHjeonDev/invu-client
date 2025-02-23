@@ -1,4 +1,4 @@
-name: PR - build and test
+name: PR - Build, Test, and Analyze with SonarCloud
 
 on:
   pull_request:
@@ -6,33 +6,45 @@ on:
 
 permissions:
   contents: read
-  pages: write
   id-token: write
 
 jobs:
-  # Build job
-  build:
+  build-test-analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Node.js 설치 및 캐싱
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "21"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          node-version: "21" # 원하는 Node.js 버전
+          cache: npm
 
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
-            
+      # 3. 의존성 설치
       - name: Install dependencies
         run: npm install
-        
-      - name: Build and test
-        run: npm test:build
+
+      # 4. 빌드 실행
+      - name: Build application
+        run: npm run build
+
+      # 5. 테스트 실행
+      - name: Run tests and generate coverage
+        run: |
+          npm run test -- --coverage
+          mkdir -p coverage
+
+      # 6. SonarCloud 분석
+      - name: Analyze with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # SonarCloud API 토큰
+        with:
+          args: >
+            -Dsonar.projectKey=devs32
+            -Dsonar.organization=Devs32_invu-server
+            -Dsonar.sources=./src 
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
