@@ -36,12 +36,6 @@ jobs:
         run: |
           npm run test -- --coverage
 
-      # 5.1 LCOV 경로 수정
-      - name: Adjust lcov.info file paths for SonarCloud
-        working-directory: ./coverage
-        run: |
-          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' ./coverage/lcov.info
-
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
@@ -51,5 +45,5 @@ jobs:
           args: >
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-server
-            -Dsonar.sources=./src 
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.sources=${{ github.workspace }}/src 
+            -Dsonar.javascript.lcov.reportPaths=${{ github.workspace }}/coverage/lcov.info
