@@ -36,17 +36,17 @@ jobs:
         run: |
           npm run test -- --coverage
 
-      - name: Display folder structure
-        run: |
-          echo "Contents of src folder:"
-          ls -R ./src || echo "No src folder found"
-          echo "Contents of coverage folder:"
-          ls -R ./coverage || echo "No coverage folder found"
-
-      - name: fix code coverage paths
-        working-directory: ./coverage
-        run: |
-          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
+#      - name: Display folder structure
+#        run: |
+#          echo "Contents of src folder:"
+#          ls -R ./src || echo "No src folder found"
+#          echo "Contents of coverage folder:"
+#          ls -R ./coverage || echo "No coverage folder found"
+#
+#      - name: fix code coverage paths
+#        working-directory: ./coverage
+#        run: |
+#          sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' lcov.info
 
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
@@ -58,4 +58,4 @@ jobs:
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
             -Dsonar.sources=./src 
-            -Dsonar.javascript.lcov.reportPaths=lcov.info
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
