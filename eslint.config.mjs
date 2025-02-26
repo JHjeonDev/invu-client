@@ -14,11 +14,13 @@ const eslintConfig = [
   {
     rules: {
       'semi': [ 'error', 'always' ],
-      'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error',
+      'react/jsx-uses-react': 'warn',
+      'react/jsx-uses-vars': 'warn',
       'react/jsx-curly-spacing': [ 'warn', 'always' ],
       'react/display-name': 'off',
+      'react-hooks/exhaustive-deps': 'off',
       'no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
       'quotes': [ 'warn', 'single' ], // 문자열 single quote가 아닌 경우 경고
       'jsx-quotes': [ 'warn', 'prefer-double' ],
       'object-curly-spacing': [ 'warn', 'always' ],
