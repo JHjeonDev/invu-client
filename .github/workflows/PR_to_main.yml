@@ -58,7 +58,7 @@ jobs:
           args: >
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
-            -Dsonar.sources=/src
-            -Dsonar.javascript.lcov.reportPaths=/coverage/lcov.info
+            -Dsonar.sources=./src
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
             -Dsonar.sourceEncoding=UTF-8
 
