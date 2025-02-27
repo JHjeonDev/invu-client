@@ -17,6 +17,7 @@ const coverClass = twMerge(
 
 export default function Cover({ type }: { type: 'intro' | 'content' }) {
   const [ dimmed, setDimmed ] = useState(true);
+  const [ display, setDisplay ] = useState<'flex' | 'none'>('flex');
   const { isInitialized } = usePageEntryStore(state => state);
 
   useEffect(() => {
@@ -25,11 +26,23 @@ export default function Cover({ type }: { type: 'intro' | 'content' }) {
     }
   }, [ isInitialized ]);
 
+  useEffect(() => {
+    if (!dimmed) {
+      const timer = setTimeout(() => {
+        setDisplay('none');
+      }, 500); // 500ms는 transition 시간과 일치해야 합니다.
+      return () => clearTimeout(timer);
+    } else {
+      setDisplay('flex');
+    }
+  }, [ dimmed ]);
+
   return (
     <div className={ coverClass }
       style={ {
         opacity: dimmed ? 0.6 : 0,
-        transition: 'opacity 0.5s ease-in-out'
+        transition: 'opacity 0.5s ease-in-out',
+        display: display
       } }
     >
       <h1 className="text-4xl font-bold mt-20"></h1>
