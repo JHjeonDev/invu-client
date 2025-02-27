@@ -21,6 +21,12 @@ function  TypingText({ text, speed = 200 }: TypingTextProps) {
 
   return (
     <TypeAnimation
+      style={ {
+        fontSize: '18px',
+        fontWeight: 'bold',
+        color: 'white'
+      } }
+      // 타이핑이 완료된 후 1000ms 후에 타이핑이 완료되었다고 신호 보냄
       sequence={ [ text, 1000, () => setIsTypingFinished(true) ] }
       speed={ { type: 'keyStrokeDelayInMs', value: speed } }
       repeat={ 0 }

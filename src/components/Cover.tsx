@@ -7,7 +7,7 @@ import TypingText from './text/TypingText';
 
 const coverClass = twMerge(
   'flex flex-col items-center justify-between h-screen w-full border border-black',
-  'bg-yellow-500',
+  'bg-gradient-to-b from-teal-300 to-sky-500',
   'opacity-60',
   'overflow-hidden',
   'h-full',
@@ -33,8 +33,10 @@ export default function Cover({ type }: { type: 'intro' | 'content' }) {
       } }
     >
       <h1 className="text-4xl font-bold mt-20"></h1>
-      <TypingText text="안녕하세요." />
-      <h3 className="text-xl font-bold mb-20">날짜 및 장소</h3>
+      <div className="px-12">
+        <TypingText text="안녕하세요.몇글자가되려나흠하나" />
+      </div>
+      <h3 className="text-white text-lg mb-20">날짜 및 장소</h3>
     </div>
   );
 }
