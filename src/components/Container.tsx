@@ -2,15 +2,16 @@
 
 import { usePageEntryStore } from '../stores/pageEntry';
 import Content from './Content';
-import Conver from './Cover';
+import Cover from './Cover';
 
 export default function Container({ inviteCode }: { inviteCode?: string }) {
   const { isInitialized } = usePageEntryStore(state => state);
 
-  console.log(inviteCode);
   return (
-    <div className="h-screen w-full relative" style={ { overflow: isInitialized ? 'hidden' : 'visible' } }>
-      <Conver />
+    <div
+      style={ { border: '1px solid red', overflow: isInitialized ? 'hidden' : 'visible' } }
+    >
+      <Cover type="intro"/>
       <Content type="intro"/>
       <Content />
     </div>
