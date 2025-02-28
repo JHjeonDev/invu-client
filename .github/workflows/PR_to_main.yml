@@ -42,9 +42,8 @@ jobs:
         run: |
           find "$PWD" -type f -name "lcov.info"
           cat ./coverage/lcov.info
-          ls -la ${{ github.workspace }}
+          # ls -la ${{ github.workspace }}
     
-    #
 #      - name: fix code coverage paths
 #        working-directory: ./coverage
 #        run: |
