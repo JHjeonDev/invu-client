@@ -62,6 +62,5 @@ jobs:
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
             -Dsonar.sources=.
-#            -Dsonar.tests=./src/__tests__
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
 
