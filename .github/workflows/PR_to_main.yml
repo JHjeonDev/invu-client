@@ -38,7 +38,7 @@ jobs:
 
       - name: Display folder structure
         run: |
-          find . -type f -name "lcov.info"
+          find "$PWD" -type f -name "lcov.info"
 
       #
 #      - name: fix code coverage paths
