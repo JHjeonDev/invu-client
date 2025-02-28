@@ -41,6 +41,7 @@ jobs:
       - name: Display folder structure
         run: |
           find "$PWD" -type f -name "lcov.info"
+          cat ./coverage/lcov.info
 
       #
 #      - name: fix code coverage paths
