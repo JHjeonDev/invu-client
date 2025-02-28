@@ -57,11 +57,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          node sonar-project.js
-
         with:
-#          projectBaseDir: ${{ github.workspace }}
           args: >
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
