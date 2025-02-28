@@ -42,7 +42,8 @@ jobs:
         run: |
           find "$PWD" -type f -name "lcov.info"
           cat ./coverage/lcov.info
-          # ls -la ${{ github.workspace }}
+          echo ------------------------
+          ls -la ${{ github.workspace }}
     
 #      - name: fix code coverage paths
 #        working-directory: ./coverage
@@ -62,5 +63,6 @@ jobs:
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
             -Dsonar.sources=.
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.tests=src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
