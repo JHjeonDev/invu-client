@@ -48,8 +48,7 @@ jobs:
 
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          node sonar-project.js
 
