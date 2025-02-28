@@ -43,10 +43,8 @@ jobs:
           find "$PWD" -type f -name "lcov.info"
           cat ./coverage/lcov.info
           pwd
-          echo "Workspace location: ${{ github.workspace }}"
           ls -la ${{ github.workspace }}
     
-
     #
 #      - name: fix code coverage paths
 #        working-directory: ./coverage
