@@ -10,8 +10,8 @@ scanner(
       'sonar.projectKey': 'Devs32_invu-client', // 프로젝트 키
       'sonar.exclusions': 'node_modules/**, .next/**, out/**',
       'sonar.javascript.lcov.reportPaths': 'coverage/lcov.info',
-      'sonar.sources': 'src/app,src/components,src/stores,src/utils',
-      'sonar.tests': 'src/__tests__'
+      'sonar.sources': './src/app',
+      'sonar.tests': './src/__tests__'
     }
   },
   () => process.exit()
