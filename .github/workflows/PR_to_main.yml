@@ -52,11 +52,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: .
           args: >
             -Dsonar.organization=devs32
             -Dsonar.projectKey=Devs32_invu-client
-            -Dsonar.sources=./src/app
-            -Dsonar.tests=src/__tests__
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.sources=${{ github.workspace }}/src/app
+            -Dsonar.tests=${{ github.workspace }}/src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=${{ github.workspace }}/coverage/lcov.info
 
