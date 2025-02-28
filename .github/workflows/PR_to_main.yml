@@ -48,15 +48,8 @@ jobs:
 
       # 6. SonarCloud 분석
       - name: Analyze with SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=devs32
-            -Dsonar.projectKey=Devs32_invu-client
-            -Dsonar.sources=src/app,src/components,src/stores,src/utils
-            -Dsonar.tests=src/__tests__
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.sourceEncoding=UTF-8
+        run: |
+          node sonar-project.js
 
