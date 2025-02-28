@@ -51,4 +51,12 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=devs32
+            -Dsonar.projectKey=Devs32_invu-client
+            -Dsonar.sources=src/app
+            -Dsonar.tests=src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
