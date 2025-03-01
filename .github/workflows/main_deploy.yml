@@ -1,8 +1,8 @@
-name: [PR] Build and Test
+name: [MAIN] Deploy
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "build/init-cicd" ] # 테스트후 변경 에정
 
 permissions:
   contents: read
@@ -51,3 +51,41 @@ jobs:
             -Dsonar.sources=./src/app
             -Dsonar.tests=./src/__tests__
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+
+  cloudtype_deploy:
+    runs-on: ubuntu-latest
+    needs: build-test-analyze
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUD_TYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN_NOREPLY32 }}
+
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: devs32/invu
+          stage: main
+          yaml: |
+            name: invu-client
+            app: next.js
+            options:
+              nodeversion: "20"
+              install: npm install
+              build: npm run build
+              healthz: /
+              env: []
+              buildenv: []
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+              preset: next.js
