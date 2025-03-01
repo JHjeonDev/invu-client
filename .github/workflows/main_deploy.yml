@@ -1,4 +1,4 @@
-name: [MAIN] Deploy
+name: MAIN - Deploy
 
 on:
   pull_request:
