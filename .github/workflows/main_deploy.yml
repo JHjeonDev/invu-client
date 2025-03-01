@@ -71,7 +71,7 @@ jobs:
       - name: Deploy
         uses: cloudtype-github-actions/deploy@v1
         with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          token: ${{ secrets.CLOUD_TYPE_TOKEN }}
           project: devs32/invu
           stage: main
           yaml: |
