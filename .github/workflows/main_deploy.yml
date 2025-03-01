@@ -1,7 +1,7 @@
 name: MAIN - Deploy
 
 on:
-  pull_request:
+  push:
     branches: [ "build/init-cicd" ] # 테스트후 변경 에정
 
 permissions:
