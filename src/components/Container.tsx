@@ -1,19 +1,14 @@
-'use client';
-
-import { usePageEntryStore } from '../stores/pageEntry';
-import Content from './Content';
 import Cover from './Cover';
+import Intro from './Intro';
+import Main from './Main';
 
 export default function Container({ inviteCode }: { inviteCode?: string }) {
-  const { isInitialized } = usePageEntryStore(state => state);
 
   return (
-    <div
-      style={ { overflow: isInitialized ? 'hidden' : 'visible' } }
-    >
+    <div>
       <Cover type="intro"/>
-      <Content type="intro"/>
-      <Content />
+      <Intro />
+      <Main />
     </div>
   );
 }
