@@ -9,7 +9,7 @@ export default function Container({ inviteCode }: { inviteCode?: string }) {
 
   return (
     <div
-      style={ { border: '1px solid red', overflow: isInitialized ? 'hidden' : 'visible' } }
+      style={ { overflow: isInitialized ? 'hidden' : 'visible' } }
     >
       <Cover type="intro"/>
       <Content type="intro"/>
