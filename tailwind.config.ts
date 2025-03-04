@@ -11,6 +11,9 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)'
+      },
+      minWidth: {
+        'sm': '384px'
       }
     }
   },
