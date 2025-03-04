@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { usePageEntryStore } from '../stores/pageEntry';
 import TypingText from './text/TypingText';
 
-const coverClass = twMerge(
+const coverWrapperClass = twMerge(
   'flex flex-col items-center justify-between w-full h-full max-w-md',
   'bg-gradient-to-b from-teal-300 to-sky-500',
   'opacity-60',
@@ -44,7 +44,7 @@ export default function Cover({ type }: { type: 'intro' | 'content' }) {
   }, [ display ]);
 
   return (
-    <div className={ coverClass }
+    <div className={ coverWrapperClass }
       style={ {
         opacity: dimmed ? 0.6 : 0,
         transition: 'opacity 0.5s ease-in-out',
