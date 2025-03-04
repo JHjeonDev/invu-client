@@ -13,9 +13,11 @@ body {
   font-family: 'GowunDodum', Arial, Helvetica, sans-serif;
 }
 
+body::-webkit-scrollbar {
+  display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨기기 */
+}
+
 @font-face {
   font-family: 'GowunDodum';
   src: url('/fonts/GowunDodum-Regular.ttf') format('truetype');
-  /* font-weight: normal;
-  font-style: normal; */
 }

@@ -2,17 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { usePageEntryStore } from '../stores/pageEntry';
-import TypingText from './text/TypingText';
+import { usePageEntryStore } from '../../stores/pageEntry';
+import TypingText from '../text/TypingText';
 
-const coverClass = twMerge(
-  'flex flex-col items-center justify-between h-screen w-full border border-black',
+const coverWrapperClass = twMerge(
+  'flex flex-col items-center justify-between w-full h-full max-w-md min-w-md',
   'bg-gradient-to-b from-teal-300 to-sky-500',
   'opacity-60',
   'overflow-hidden',
-  'h-full',
-  'fixed',
-  'top-0 left-0'
+  'fixed'
 );
 
 export default function Cover({ type }: { type: 'intro' | 'content' }) {
@@ -37,8 +35,16 @@ export default function Cover({ type }: { type: 'intro' | 'content' }) {
     }
   }, [ dimmed ]);
 
+  useEffect(() => {
+    if (display === 'flex') {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  }, [ display ]);
+
   return (
-    <div className={ coverClass }
+    <div className={ coverWrapperClass }
       style={ {
         opacity: dimmed ? 0.6 : 0,
         transition: 'opacity 0.5s ease-in-out',
@@ -49,7 +55,9 @@ export default function Cover({ type }: { type: 'intro' | 'content' }) {
       <div className="px-12">
         <TypingText text="안녕하세요.몇글자가되려나흠하나" />
       </div>
-      <h3 className="text-white text-lg mb-20">날짜 및 장소</h3>
+      <h3 className="text-white text-lg mb-20">
+        <span>날짜 및 장소</span>
+      </h3>
     </div>
   );
 }

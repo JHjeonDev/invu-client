@@ -1,9 +1,9 @@
-import Container from '@/components/Container';
+import Container from '@/components/content/Container';
 import { twMerge } from 'tailwind-merge';
 
 // 초대 페이지는 모바일환경에서만 볼 수 있다는 가정
 const invtePageClass = twMerge(
-  'h-screen w-full relative',
+  'h-full w-full relative',
   'overflow-hidden',
   'max-w-md min-w-sm mx-auto',
   'box-border'
