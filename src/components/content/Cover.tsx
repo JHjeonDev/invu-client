@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { usePageEntryStore } from '../stores/pageEntry';
-import TypingText from './text/TypingText';
+import { usePageEntryStore } from '../../stores/pageEntry';
+import TypingText from '../text/TypingText';
 
 const coverWrapperClass = twMerge(
-  'flex flex-col items-center justify-between w-full h-full max-w-md',
+  'flex flex-col items-center justify-between w-full h-full max-w-md min-w-md',
   'bg-gradient-to-b from-teal-300 to-sky-500',
   'opacity-60',
   'overflow-hidden',
