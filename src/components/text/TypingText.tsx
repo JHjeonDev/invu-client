@@ -6,7 +6,7 @@ import { TypeAnimation } from 'react-type-animation';
 interface TypingTextProps {
   text: string;
   speed?: number; // 타이핑 속도를 조절할 수 있는 옵션
-}
+};
 
 function  TypingText({ text, speed = 200 }: TypingTextProps) {
   const [ isTypingFinished, setIsTypingFinished ] = useState(false);
@@ -14,7 +14,6 @@ function  TypingText({ text, speed = 200 }: TypingTextProps) {
 
   useEffect(() => {
     if (isTypingFinished) {
-      console.log('타이핑이 완료됨');
       setIsInitialized(false);
     }
   }, [ isTypingFinished ]);

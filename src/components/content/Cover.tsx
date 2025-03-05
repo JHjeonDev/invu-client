@@ -13,7 +13,11 @@ const coverWrapperClass = twMerge(
   'fixed'
 );
 
-export default function Cover({ type }: { type: 'intro' | 'content' }) {
+type CoverProps = {
+  type: 'intro' | 'content';
+};
+
+export default function Cover({ type }: CoverProps) {
   const [ dimmed, setDimmed ] = useState(true);
   const [ display, setDisplay ] = useState<'flex' | 'none'>('flex');
   const { isInitialized } = usePageEntryStore(state => state);
