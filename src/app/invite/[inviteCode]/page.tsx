@@ -9,7 +9,11 @@ const invtePageClass = twMerge(
   'box-border'
 );
 
-export default async function InvitePage({ params }: { params: Promise<{ inviteCode: string }> }) {
+type InvitePageProps = {
+  params: Promise<{ inviteCode: string }>;
+};
+
+export default async function InvitePage({ params }: InvitePageProps) {
   const inviteCode = (await params).inviteCode; // 초대 코드
 
   await new Promise((resolve) => setTimeout(() => {

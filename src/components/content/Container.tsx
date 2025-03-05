@@ -1,8 +1,13 @@
 import Cover from '../content/Cover';
 import Intro from '../content/Intro';
 import Main from '../content/Main';
+import Timeline from '../content/Timeline';
 
-export default function Container({ inviteCode }: { inviteCode?: string }) {
+type ContainerProps = {
+  inviteCode?: string;
+};
+
+export default function Container({ inviteCode }: ContainerProps) {
 
   const mainData = {
     title: '안녕하세요',
@@ -14,11 +19,34 @@ export default function Container({ inviteCode }: { inviteCode?: string }) {
     }
   };
 
+  const timelineData = {
+    title: '타임라인',
+    content: [
+      { 
+        imgPath: '/images/horizontal-image-01.jpg',
+        text: '첫번째 텍스트'
+      },
+      {
+        imgPath: '/images/horizontal-image-01.jpg',
+        text: '두번째 텍스트'
+      },
+      {
+        imgPath: '/images/horizontal-image-01.jpg',
+        text: '세번째 텍스트'
+      },
+      {
+        imgPath: '/images/horizontal-image-01.jpg',
+        text: '네번째 텍스트'
+      }
+    ]
+  };
+
   return (
     <div>
       <Cover type="intro"/>
       <Intro />
       <Main data={ mainData } />
+      <Timeline data={ timelineData } />
     </div>
   );
 }
