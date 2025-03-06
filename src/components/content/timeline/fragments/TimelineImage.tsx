@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
+import { timelineAnimation, timelineAnimationOptions } from './constants';
+
 type TimelineImageProps = {
   imgPath: string;
 };
@@ -14,13 +16,7 @@ export default function TimelineImage({ imgPath }: TimelineImageProps) {
     const observer = new IntersectionObserver(
       ([ entry ]) => {
         if (entry.isIntersecting) {
-          ref.current?.animate(
-            [
-              { opacity: '0', transform: 'translateY(20px)' },
-              { opacity: '1', transform: 'translateY(0)' }
-            ],
-            { fill: 'both', duration: 1000 }
-          );
+          ref.current?.animate(timelineAnimation, timelineAnimationOptions);
         }
       },
       { threshold: 0.1 }
