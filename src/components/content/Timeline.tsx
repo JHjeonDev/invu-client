@@ -2,7 +2,7 @@
 
 import { twMerge } from 'tailwind-merge';
 
-import TimelineImage from '@/components/image/TimelineImage';
+import TimelineItem from '@/components/content/timeline/TimelineItem';
 import TitleText from '@/components/text/TitleText';
 
 const timelineWrapperClass = twMerge(
@@ -24,7 +24,7 @@ export default function Timeline({ data }: TimelineProps) {
   return (
     <div className={ timelineWrapperClass }>
       <TitleText text={ data.title } />
-      <TimelineImage data={ data.content } />
+      <TimelineItem data={ data.content } />
     </div>
   );
 }
