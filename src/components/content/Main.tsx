@@ -28,7 +28,7 @@ export default function Main({ data }: MainProps) {
               alt="mainImage"
               loading="lazy"
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
             />
           </figure>
         )

@@ -24,18 +24,22 @@ export default function Container({ inviteCode }: ContainerProps) {
     content: [
       { 
         imgPath: '/images/horizontal-image-01.jpg',
+        date: '2025.03.06',
         text: '첫번째 텍스트'
       },
       {
         imgPath: '/images/horizontal-image-01.jpg',
+        date: '2025.03.06',
         text: '두번째 텍스트'
       },
       {
         imgPath: '/images/horizontal-image-01.jpg',
+        date: '2025.03.06',
         text: '세번째 텍스트'
       },
       {
         imgPath: '/images/horizontal-image-01.jpg',
+        date: '2025.03.06',
         text: '네번째 텍스트'
       }
     ]

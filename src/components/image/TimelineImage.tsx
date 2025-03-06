@@ -8,6 +8,7 @@ const timelineImageWrapperClass = twMerge(
 type TimelineImageProps = {
   data?: {
     imgPath?: string;
+    date?: string;
     text?: string;
   }[];
   reverse?: boolean;
@@ -26,20 +27,22 @@ export default function TimelineImage({ data, reverse }: TimelineImageProps) {
               <div key={ index } className="flex items-center justify-between py-10">
                 { (reverse ? index % 2 !== 0 : index % 2 === 0) ? (
                   <>
-                    <figure className="relative h-[130px] w-[40%]">
-                      <Image src={ item.imgPath || '' } alt={ item.text || '' } layout="fill" objectFit="cover" />
+                    <figure className="relative h-[130px] w-[42%]">
+                      <Image src={ item.imgPath || '' } alt={ item.text || '' } layout="fill" objectFit="contain" />
                     </figure>
                     <div className="w-[42%]">
-                      <div className="text-center">{ item.text }</div>
+                      <div className="text-sm text-gray-500">{ item.date }</div>
+                      <div className="">{ item.text }</div>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="w-[42%]">
-                      <div className="text-center">{ item.text }</div>
+                      <div className="text-sm text-gray-500">{ item.date }</div>
+                      <div className="">{ item.text }</div>
                     </div>
-                    <figure className="relative h-[130px] w-[40%]">
-                      <Image src={ item.imgPath || '' } alt={ item.text || '' } layout="fill" objectFit="cover" />
+                    <figure className="relative h-[130px] w-[42%]">
+                      <Image src={ item.imgPath || '' } alt={ item.text || '' } layout="fill" objectFit="contain" />
                     </figure>
                   </>
                 )}
