@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+import { timelineAnimation, timelineAnimationOptions } from './constants';
+
 type TimelineTextProps = {
   date?: string | '';
   text?: string | '';
@@ -14,13 +16,7 @@ export default function TimelineText({ date, text }: TimelineTextProps) {
     const observer = new IntersectionObserver(
       ([ entry ]) => {
         if (entry.isIntersecting) {
-          ref.current?.animate(
-            [
-              { opacity: '0', transform: 'translateY(20px)' },
-              { opacity: '1', transform: 'translateY(0)' }
-            ],
-            { fill: 'both', duration: 1000 }
-          );
+          ref.current?.animate(timelineAnimation, timelineAnimationOptions);
         }
       },
       { threshold: 0.1 }
