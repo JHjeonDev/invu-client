@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
+import { useIntersectionObserver } from '@/utils/customHook';
 import { timelineAnimation, timelineAnimationOptions } from './constants';
 
 type TimelineTextProps = {
@@ -12,24 +13,7 @@ type TimelineTextProps = {
 export default function TimelineText({ date, text }: TimelineTextProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([ entry ]) => {
-        if (entry.isIntersecting) {
-          ref.current?.animate(timelineAnimation, timelineAnimationOptions);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  useIntersectionObserver(ref, timelineAnimation, timelineAnimationOptions);
 
   return (
     <div ref={ ref } className="h-[120px] w-[80%] py-6">

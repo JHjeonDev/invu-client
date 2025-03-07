@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
+import { useIntersectionObserver } from '@/utils/customHook';
 import { timelineAnimation, timelineAnimationOptions } from './constants';
 
 type TimelineImageProps = {
@@ -10,26 +11,9 @@ type TimelineImageProps = {
 };
 
 export default function TimelineImage({ imgPath }: TimelineImageProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([ entry ]) => {
-        if (entry.isIntersecting) {
-          ref.current?.animate(timelineAnimation, timelineAnimationOptions);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  useIntersectionObserver(ref, timelineAnimation, timelineAnimationOptions);
 
   return (
     <figure ref={ ref } className="relative h-[140px] w-[80%]">
