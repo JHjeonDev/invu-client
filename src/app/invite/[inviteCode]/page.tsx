@@ -16,10 +16,6 @@ type InvitePageProps = {
 export default async function InvitePage({ params }: InvitePageProps) {
   const inviteCode = (await params).inviteCode; // 초대 코드
 
-  await new Promise((resolve) => setTimeout(() => {
-    resolve(true);
-  }, 100)); // 대기 실험 코드
-
   return (
     <div className={ invtePageClass }>
       {/* <h1>초대 코드: <TypingText text={ inviteCode } /></h1> */}
