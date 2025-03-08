@@ -1,4 +1,5 @@
 import { request } from '@/utils/http';
+import { redirect } from 'next/navigation';
 import Cover from '../content/Cover';
 import Intro from '../content/Intro';
 import Main from '../content/Main';
@@ -11,11 +12,17 @@ type ContainerProps = {
 const requestInvitationData = async (inviteCode: string | undefined) => {
   if (!inviteCode) return null;
 
-  const api = `/api/v1/invitation/${ inviteCode }`;
-  const res = await request(api);
-  const data = await res.json();
-  const jsonData = JSON.parse(data.data.invuJson);
-  return jsonData;
+  try {
+    const api = `/api/v1/invitation/${ inviteCode }`;
+    const res = await request(api);
+    const data = await res.json();
+    const jsonData = JSON.parse(data.data.invuJson);
+
+    return jsonData;
+  } catch (error) {
+    console.error(error);
+    return redirect('/not-found');
+  }
 };
 
 export default async function Container({ inviteCode }: ContainerProps) {
