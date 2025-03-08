@@ -1,4 +1,4 @@
-name: PR - Build, Test, and Analyze with SonarCloud
+name: PR - Build and Test
 
 on:
   pull_request:
