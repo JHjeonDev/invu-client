@@ -189,7 +189,11 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
     signal
   } as RequestInit;
 
-  let fullUrl = /^https?:/.test(url) ? url : `${ process.env.BASE_URL }${ url }`;
+  const baseUrl = checkServer()
+    ? process.env.SERVER_API_BASE_URL
+    : process.env.CLIENT_API_BASE_URL;
+
+  let fullUrl = /^https?:/.test(url) ? url : `${ baseUrl }${ url }`;
 
   if (method === 'GET' && body && typeof body === 'object') {
     const params = new URLSearchParams();
