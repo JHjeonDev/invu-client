@@ -10,7 +10,8 @@ const coverWrapperClass = twMerge(
   'bg-gradient-to-b from-teal-300 to-sky-500',
   'opacity-60',
   'overflow-hidden',
-  'fixed'
+  'fixed',
+  'z-50'
 );
 
 type CoverProps = {
@@ -21,6 +22,10 @@ export default function Cover({ type }: CoverProps) {
   const [ dimmed, setDimmed ] = useState(true);
   const [ display, setDisplay ] = useState<'flex' | 'none'>('flex');
   const { isInitialized } = usePageEntryStore(state => state);
+
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+  }, []);
 
   useEffect(() => {
     if (!isInitialized) {
