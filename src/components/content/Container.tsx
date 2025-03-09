@@ -5,8 +5,8 @@ import { request } from '@/utils/http';
 
 import Main from '../content/Main';
 import Timeline from '../content/Timeline';
-import Cover from './Cover';
 import Intro from './Intro';
+import ScrollUpCover from './cover/ScrollUpCover';
 
 type ContainerProps = {
   inviteCode?: string;
@@ -48,7 +48,7 @@ export default async function Container({ inviteCode }: ContainerProps) {
 
   return (
     <React.Fragment key={ inviteCode }>
-      <Cover type="intro"/>
+      <ScrollUpCover />
       { renderContent(invitationData) }
     </React.Fragment>
   );
