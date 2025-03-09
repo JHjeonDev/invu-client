@@ -1,9 +1,12 @@
-import { request } from '@/utils/http';
 import { notFound } from 'next/navigation';
-import Cover from '../content/Cover';
-import Intro from '../content/Intro';
+import React from 'react';
+
+import { request } from '@/utils/http';
+
 import Main from '../content/Main';
 import Timeline from '../content/Timeline';
+import Cover from './Cover';
+import Intro from './Intro';
 
 type ContainerProps = {
   inviteCode?: string;
@@ -25,19 +28,28 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
   }
 };
 
-export default async function Container({ inviteCode }: ContainerProps) {
+const renderContent = (data: any[]): React.ReactNode => {
+  return data?.map((item: any) => {
+    switch (item.type) {
+      case 'intro':
+        return <Intro />;
+      case 'main':
+        return <Main data={ item } />;
+      case 'timeline':
+        return <Timeline data={ item } />;
+      default:
+        return null;
+    }
+  });
+};
 
+export default async function Container({ inviteCode }: ContainerProps) {
   const invitationData = await requestInvitationData(inviteCode);
 
-  const mainData = invitationData[0];
-  const timelineData = invitationData[1];
-
   return (
-    <div>
+    <React.Fragment key={ inviteCode }>
       <Cover type="intro"/>
-      <Intro />
-      <Main data={ mainData } />
-      <Timeline data={ timelineData } />
-    </div>
+      { renderContent(invitationData) }
+    </React.Fragment>
   );
 }
