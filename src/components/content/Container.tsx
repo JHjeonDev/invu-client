@@ -1,5 +1,5 @@
 import { request } from '@/utils/http';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Cover from '../content/Cover';
 import Intro from '../content/Intro';
 import Main from '../content/Main';
@@ -20,8 +20,8 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
 
     return jsonData;
   } catch (error) {
-    console.error(error);
-    return redirect('/not-found');
+    console.warn(error);
+    return notFound(); 
   }
 };
 
