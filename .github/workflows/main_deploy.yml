@@ -2,7 +2,7 @@ name: MAIN - Deploy
 
 on:
   push:
-    branches: [ "build/init-cicd" ] # 테스트후 변경 에정
+    branches: [ "main" ] # 테스트후 변경 에정
 
 permissions:
   contents: read
