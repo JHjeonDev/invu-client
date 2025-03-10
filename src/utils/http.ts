@@ -195,6 +195,7 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
 
   let fullUrl = /^https?:/.test(url) ? url : `${ baseUrl }${ url }`;
 
+  console.log('fetch url', fullUrl);
   if (method === 'GET' && body && typeof body === 'object') {
     const params = new URLSearchParams();
     Object.entries(body).forEach(([ key, value ]) => {
