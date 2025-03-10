@@ -195,7 +195,7 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
 
   let fullUrl = /^https?:/.test(url) ? url : `${ baseUrl }${ url }`;
 
-  console.log('fetch url', fullUrl);
+  console.info('fetch url', fullUrl);
   if (method === 'GET' && body && typeof body === 'object') {
     const params = new URLSearchParams();
     Object.entries(body).forEach(([ key, value ]) => {
@@ -214,7 +214,7 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
   const res = await fetch(fullUrl, { ...finalOptions });
 
   if (!res.ok) {
-    console.log('fetch error', res);
+    console.info('fetch error', res);
     throw new RequestError(method, fullUrl, res.status, res.statusText);
   }
 
