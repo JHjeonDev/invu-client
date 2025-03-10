@@ -214,6 +214,7 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
   const res = await fetch(fullUrl, { ...finalOptions });
 
   if (!res.ok) {
+    console.log('fetch error', res);
     throw new RequestError(method, fullUrl, res.status, res.statusText);
   }
 
