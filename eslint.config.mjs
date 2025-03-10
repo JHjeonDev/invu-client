@@ -21,7 +21,6 @@ const eslintConfig = [
       'react-hooks/exhaustive-deps': 'off',
       'no-unused-vars': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
       'quotes': [ 'warn', 'single' ], // 문자열 single quote가 아닌 경우 경고
       'jsx-quotes': [ 'warn', 'prefer-double' ],
       'object-curly-spacing': [ 'warn', 'always' ],
@@ -40,8 +39,7 @@ const eslintConfig = [
       'prefer-const': 'error',
       'no-multiple-empty-lines': [ 'error', { 'max': 1 } ],
       'eol-last': [ 'error', 'always' ],
-      'no-debugger': 'error',
-      ''
+      'no-debugger': 'error'
     }
   }
 ];

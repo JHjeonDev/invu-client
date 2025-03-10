@@ -6,7 +6,7 @@ const apiBaseUrl = process.env.NODE_ENV === 'development'
 
 const serverApiBaseUrl = process.env.NODE_ENV === 'development'
   ? 'https://port-0-invu-api-server-m78pe23vb8056d68.sel4.cloudtype.app'
-  : 'invu-api-server:8080';
+  : 'http://invu-api-server:8080';
 
 const nextConfig: NextConfig = {
   env: {
