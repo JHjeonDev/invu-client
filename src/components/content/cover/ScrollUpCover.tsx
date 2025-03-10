@@ -14,7 +14,7 @@ const coverWrapperClass = twMerge(
 );
 
 export default function ScrollUpCover() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [ isScrolled, setIsScrolled ] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,16 +31,16 @@ export default function ScrollUpCover() {
 
   return (
     <div
-      className={coverWrapperClass}
-      style={{
+      className={ coverWrapperClass }
+      style={ {
         transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)',
-        opacity: isScrolled ? 0 : 1,
-      }}
+        opacity: isScrolled ? 0 : 1
+      } }
       onTouchMove={ () => console.log('touchmove') }
     >
       <figure className="min-w-[80%] max-w-[80%] relative h-[60%] my-5 opacity-80 mt-20">
         <Image
-          src={ '/images/vertical-image-01.jpeg'}
+          src={ '/images/vertical-image-01.jpeg' }
           alt="coverImage"
           loading="lazy"
           layout="fill"
