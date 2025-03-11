@@ -31,14 +31,14 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
 const renderContent = (data: any[]): React.ReactNode => {
   return data?.map((item: any) => {
     switch (item.type) {
-      case 'intro':
-        return <Intro />;
-      case 'main':
-        return <Main data={ item } />;
-      case 'timeline':
-        return <Timeline data={ item } />;
-      default:
-        return null;
+    case 'intro':
+      return <Intro />;
+    case 'main':
+      return <Main data={ item } />;
+    case 'timeline':
+      return <Timeline data={ item } />;
+    default:
+      return null;
     }
   });
 };
@@ -46,9 +46,18 @@ const renderContent = (data: any[]): React.ReactNode => {
 export default async function Container({ inviteCode }: ContainerProps) {
   const invitationData = await requestInvitationData(inviteCode);
 
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  const coverData = {
+    coverImage: '/images/vertical-image-01.jpeg',
+    coverTitle: 'ㅇㅇㅇ',
+    coverDate: '2025. 03. 10 | 오후 10:00',
+    coverLocation: '장소'
+  };
+
   return (
     <React.Fragment key={ inviteCode }>
-      <ScrollUpCover />
+      <ScrollUpCover data={ coverData } />
       { renderContent(invitationData) }
     </React.Fragment>
   );
