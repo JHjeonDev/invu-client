@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
 import TitleText from '@/components/text/TitleText';
@@ -24,13 +23,7 @@ export default function Main({ data }: MainProps) {
       {
         data.imgPath && (
           <figure className="w-full relative h-[250px] top-0 my-5">
-            <Image
-              src={ data.imgPath }
-              alt="mainImage"
-              loading="lazy"
-              layout="fill"
-              objectFit="contain"
-            />
+            <img src={ data.imgPath } alt="mainImage" className="object-contain w-full h-full" />
           </figure>
         )
       }
