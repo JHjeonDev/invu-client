@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useRef } from 'react';
 
 import { useIntersectionObserver } from '@/utils/customHook';
@@ -17,7 +16,7 @@ export default function TimelineImage({ imgPath }: TimelineImageProps) {
 
   return (
     <figure ref={ ref } className="relative h-[140px] w-[80%]">
-      <Image src={ imgPath } alt="Timeline Image" layout="fill" objectFit="contain" />
+      <img src={ imgPath } alt="Timeline Image" className="object-contain w-full h-full" />
     </figure>
   );
 }
