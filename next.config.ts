@@ -14,7 +14,12 @@ const nextConfig: NextConfig = {
     SERVER_API_BASE_URL: serverApiBaseUrl
   },
   images: {
-    domains: [ 'pub-68537adb098842dca26d13cffdcd289e.r2.dev' ]
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pub-68537adb098842dca26d13cffdcd289e.r2.dev'
+      }
+    ]
   }
   /* config options here */
 };

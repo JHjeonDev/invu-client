@@ -4,9 +4,9 @@ import React from 'react';
 import { request } from '@/utils/http';
 
 import Main from '../content/Main';
-import Timeline from '../content/Timeline';
 import Intro from './Intro';
 import ScrollUpCover from './cover/ScrollUpCover';
+import Timeline from './timeline/Timeline';
 
 type ContainerProps = {
   inviteCode?: string;
@@ -17,7 +17,8 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
 
   try {
     const api = `/api/v1/invitation/${ inviteCode }`;
-    const res = await request(api);
+    // 60초 동안 데이터 캐시
+    const res = await request(api, { next: { revalidate: 60 } });
     const data = await res.json();
     const jsonData = JSON.parse(data.data.invuJson);
 
@@ -56,7 +57,7 @@ export default async function Container({ inviteCode }: ContainerProps) {
   };
 
   return (
-    <React.Fragment key={ inviteCode }>
+    <React.Fragment key={ `${ inviteCode }-${ Math.floor(Math.random() * 10000) }` }>
       <ScrollUpCover data={ coverData } />
       { renderContent(invitationData) }
     </React.Fragment>
