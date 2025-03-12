@@ -40,8 +40,7 @@ const eslintConfig = [
       'prefer-const': 'error',
       'no-multiple-empty-lines': [ 'error', { 'max': 1 } ],
       'eol-last': [ 'error', 'always' ],
-      'no-debugger': 'error',
-      ''
+      'no-debugger': 'error'
     }
   }
 ];

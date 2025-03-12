@@ -4,6 +4,7 @@ type RequestType = {
   headers?: HeadersInit;
   cache?: RequestCache;
   signal?: AbortSignal;
+  next?: { revalidate?: number };
 }
 
 /**
@@ -176,7 +177,8 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
     method = 'GET',
     body,
     headers = {},
-    signal = AbortSignal.timeout(REQUEST_TIMEOUT_MILLIS)
+    signal = AbortSignal.timeout(REQUEST_TIMEOUT_MILLIS),
+    next
   } = options;
 
   let finalOptions: RequestInit = {
@@ -188,6 +190,10 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
     },
     signal
   } as RequestInit;
+
+  if (next) {
+    finalOptions.next = next;
+  }
 
   const baseUrl = checkServer()
     ? process.env.SERVER_API_BASE_URL
@@ -213,6 +219,7 @@ export const request = async (url: string, options: RequestType = {}): Promise<R
   const res = await fetch(fullUrl, { ...finalOptions });
 
   if (!res.ok) {
+    console.info('fetch error', res);
     throw new RequestError(method, fullUrl, res.status, res.statusText);
   }
 

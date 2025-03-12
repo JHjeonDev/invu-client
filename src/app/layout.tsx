@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Head from 'next/head';
 import './globals.css';
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,9 +12,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js" async></script>
-      </Head>
       <body
         className={ 'antialiased' }
       >

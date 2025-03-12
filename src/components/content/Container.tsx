@@ -4,9 +4,9 @@ import React from 'react';
 import { request } from '@/utils/http';
 
 import Main from '../content/Main';
-import Timeline from '../content/Timeline';
-import Cover from './Cover';
 import Intro from './Intro';
+import ScrollUpCover from './cover/ScrollUpCover';
+import Timeline from './timeline/Timeline';
 
 type ContainerProps = {
   inviteCode?: string;
@@ -17,7 +17,8 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
 
   try {
     const api = `/api/v1/invitation/${ inviteCode }`;
-    const res = await request(api);
+    // 60초 동안 데이터 캐시
+    const res = await request(api, { next: { revalidate: 60 } });
     const data = await res.json();
     const jsonData = JSON.parse(data.data.invuJson);
 
@@ -31,14 +32,14 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
 const renderContent = (data: any[]): React.ReactNode => {
   return data?.map((item: any) => {
     switch (item.type) {
-      case 'intro':
-        return <Intro />;
-      case 'main':
-        return <Main data={ item } />;
-      case 'timeline':
-        return <Timeline data={ item } />;
-      default:
-        return null;
+    case 'intro':
+      return <Intro />;
+    case 'main':
+      return <Main data={ item } />;
+    case 'timeline':
+      return <Timeline data={ item } />;
+    default:
+      return null;
     }
   });
 };
@@ -46,9 +47,18 @@ const renderContent = (data: any[]): React.ReactNode => {
 export default async function Container({ inviteCode }: ContainerProps) {
   const invitationData = await requestInvitationData(inviteCode);
 
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  const coverData = {
+    coverImage: '/images/vertical-image-01.jpeg',
+    coverTitle: 'ㅇㅇㅇ',
+    coverDate: '2025. 03. 10 | 오후 10:00',
+    coverLocation: '장소'
+  };
+
   return (
-    <React.Fragment key={ inviteCode }>
-      <Cover type="intro"/>
+    <React.Fragment key={ `${ inviteCode }-${ Math.floor(Math.random() * 10000) }` }>
+      <ScrollUpCover data={ coverData } />
       { renderContent(invitationData) }
     </React.Fragment>
   );
