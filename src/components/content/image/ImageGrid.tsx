@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -41,6 +41,18 @@ export default function ImageGrid({ images }: ImageGridProps) {
       setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length);
     }
   };
+
+  useEffect(() => {
+    if (selectedImageIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [ selectedImageIndex ]);
 
   return (
     <div>
