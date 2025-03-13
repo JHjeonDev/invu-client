@@ -6,6 +6,7 @@ import { request } from '@/utils/http';
 import Main from '../content/Main';
 import Intro from './Intro';
 import ScrollUpCover from './cover/ScrollUpCover';
+import ImageGrid from './image/ImageGrid';
 import Timeline from './timeline/Timeline';
 
 type ContainerProps = {
@@ -56,10 +57,20 @@ export default async function Container({ inviteCode }: ContainerProps) {
     coverLocation: '장소'
   };
 
+  const imageGridData = [
+    '/images/vertical-image-01.jpeg',
+    '/images/vertical-image-01.jpeg',
+    '/images/vertical-image-01.jpeg',
+    '/images/vertical-image-01.jpeg',
+    '/images/vertical-image-01.jpeg',
+    '/images/vertical-image-01.jpeg'
+  ];
+
   return (
     <React.Fragment key={ `${ inviteCode }-${ Math.floor(Math.random() * 10000) }` }>
       <ScrollUpCover data={ coverData } />
       { renderContent(invitationData) }
+      <ImageGrid images={ imageGridData } />
     </React.Fragment>
   );
 }
