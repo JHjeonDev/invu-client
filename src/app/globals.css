@@ -24,5 +24,6 @@ body::-webkit-scrollbar {
 
 @font-face {
   font-family: 'GowunDodum';
+  font-display: swap;
   src: url('/fonts/GowunDodum-Regular.ttf') format('truetype');
 }
