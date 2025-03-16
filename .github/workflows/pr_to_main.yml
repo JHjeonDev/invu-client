@@ -1,0 +1,53 @@
+name: PR - Build and Test
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-test-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Node.js 설치 및 캐싱
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "21"
+          cache: npm
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 빌드 실행
+      - name: Build application
+        run: npm run build
+
+      # 5. 테스트 실행
+      - name: Run tests and generate coverage
+        run: |
+          npm run test -- --coverage
+
+      # 6. SonarCloud 분석
+      - name: Analyze with SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=devs32
+            -Dsonar.projectKey=Devs32_invu-client
+            -Dsonar.sources=./src/app
+            -Dsonar.tests=./src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
