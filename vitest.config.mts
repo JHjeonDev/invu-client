@@ -10,6 +10,11 @@ export default defineConfig({
     setupFiles: [ './src/__tests__/setupTests.tsx' ],  // 테스트 전에 실행될 파일을 지정하는 옵션
     benchmark: {
       include: [ '**/*.{bench,benchmark}.?(c|m)[jt]s?(x)' ]
+    },
+    coverage: {
+      provider: 'v8', // V8 커버리지 사용
+      reporter: [ 'lcov' ], // 텍스트 + lcov + html 형식 리포트 생성
+      reportsDirectory: 'coverage' // 커버리지 파일이 생성될 디렉토리
     }
   }
 });
