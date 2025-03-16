@@ -18,13 +18,37 @@ interface TimeLeft {
     seconds: number;
 }
 
-const DdayCounterComponent: React.FC<DdayCounterProps> = ({
+const replaceTemplateVariables = (text: string, timeLeft: TimeLeft) => {
+  if (!text) return null;
+
+  // 모든 템플릿 변수를 찾아서 치환
+  const templateRegex = /\{\$(days|hours|minutes|seconds)\}/g;
+
+  const parts = text.split(templateRegex);
+
+  return parts.map((part, index) => {
+    switch(part) {
+    case 'days':
+      return <span key={ index } className="text-orange-400 font-bold">{timeLeft.days}</span>;
+    case 'hours':
+      return <span key={ index } className="text-orange-400 font-bold">{padNumber(timeLeft.hours)}</span>;
+    case 'minutes':
+      return <span key={ index } className="text-orange-400 font-bold">{padNumber(timeLeft.minutes)}</span>;
+    case 'seconds':
+      return <span key={ index } className="text-orange-400 font-bold">{padNumber(timeLeft.seconds)}</span>;
+    default:
+      return part;
+    }
+  });
+};
+
+export default function DdayCounterComponent({
   targetDate,
   title,
   subtitle,
   bottomMessage,
   showTimeDisplay
-}) => {
+}: DdayCounterProps) {
   const [ timeLeft, setTimeLeft ] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -39,30 +63,6 @@ const DdayCounterComponent: React.FC<DdayCounterProps> = ({
 
     return () => clearInterval(timer);
   }, [ targetDate ]);
-
-  const replaceTemplateVariables = (text?: string) => {
-    if (!text) return null;
-
-    // 모든 템플릿 변수를 찾아서 치환
-    const templateRegex = /\{\$(days|hours|minutes|seconds)\}/g;
-
-    const parts = text.split(templateRegex);
-
-    return parts.map((part, index) => {
-      switch(part) {
-      case 'days':
-        return <span key={ index } className="text-orange-400 font-medium">{timeLeft.days}</span>;
-      case 'hours':
-        return <span key={ index } className="text-orange-400 font-medium">{padNumber(timeLeft.hours)}</span>;
-      case 'minutes':
-        return <span key={ index } className="text-orange-400 font-medium">{padNumber(timeLeft.minutes)}</span>;
-      case 'seconds':
-        return <span key={ index } className="text-orange-400 font-medium">{padNumber(timeLeft.seconds)}</span>;
-      default:
-        return part;
-      }
-    });
-  };
 
   return (
     <section className="w-full max-w-md mx-auto text-center">
@@ -104,7 +104,7 @@ const DdayCounterComponent: React.FC<DdayCounterProps> = ({
       {
         subtitle && (
           <p className="text-gray-600 text-sm">
-            { replaceTemplateVariables(subtitle) }
+            { replaceTemplateVariables(subtitle, timeLeft) }
           </p>
         )
       }
@@ -127,5 +127,3 @@ const DdayCounterComponent: React.FC<DdayCounterProps> = ({
     </section>
   );
 };
-
-export default DdayCounterComponent;
