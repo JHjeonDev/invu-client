@@ -3,12 +3,12 @@ import React from 'react';
 
 import { request } from '@/utils/http';
 
+import DdayCounter from '@/components/content/DdayCounter';
 import Main from '../content/Main';
 import Intro from './Intro';
 import ScrollUpCover from './cover/ScrollUpCover';
 import ImageGrid from './image/ImageGrid';
 import Timeline from './timeline/Timeline';
-import DdayCounter from "@/components/content/DdayCounter";
 
 type ContainerProps = {
   inviteCode?: string;
