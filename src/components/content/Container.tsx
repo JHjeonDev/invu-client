@@ -59,7 +59,7 @@ export default async function Container({ inviteCode }: ContainerProps) {
 
   const imageGridData = [
     '/images/vertical-image-01.jpeg',
-    '/images/vertical-image-01.jpeg',
+    '/images/horizontal-image-01.jpg',
     '/images/vertical-image-01.jpeg',
     '/images/vertical-image-01.jpeg',
     '/images/vertical-image-01.jpeg',

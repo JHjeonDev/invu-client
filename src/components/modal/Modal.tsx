@@ -27,10 +27,9 @@ const modalHeaderClass = twMerge(
 );
 
 const modalBodyClass = twMerge(
-  'flex flex-col justify-center',
-  'w-full h-full object-cover',
-  'rounded-lg',
-  'cursor-pointer'
+  'flex flex-col',
+  'w-full h-full',
+  'pt-4'
 );
 
 const getAnimationType = (type: undefined | 'fade' | 'slide', isOpen: boolean) => {

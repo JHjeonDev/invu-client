@@ -1,0 +1,22 @@
+.image-grid-slider {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .slick-list {
+    height: 100%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+  }
+
+  .slick-track {
+      display: flex;
+      align-items: center;
+  }
+
+  .slick-dots {
+    position: static;
+    height: 3rem;
+  }
+}
