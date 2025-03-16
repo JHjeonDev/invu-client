@@ -1,9 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import { twMerge } from 'tailwind-merge';
 
-import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import Modal from '@/components/modal/Modal';
+import { intersectionAnimation, intersectionAnimationOptions } from '@/utils/constants/intersectionAnimation';
+import { useIntersectionObserver } from '@/utils/customHook';
+import Slider from 'react-slick';
 
 type ImageGridProps = {
   images: string[];
@@ -21,6 +26,9 @@ const imageGridItemClass = twMerge(
 
 export default function ImageGrid({ images }: ImageGridProps) {
   const [ selectedImageIndex, setSelectedImageIndex ] = useState<number | null>(null);
+  const imageGridRef = useRef<HTMLDivElement>(null);
+
+  useIntersectionObserver(imageGridRef, intersectionAnimation, intersectionAnimationOptions);
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index);
@@ -30,33 +38,9 @@ export default function ImageGrid({ images }: ImageGridProps) {
     setSelectedImageIndex(null);
   };
 
-  const handleNextImage = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex((selectedImageIndex + 1) % images.length);
-    }
-  };
-
-  const handlePrevImage = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length);
-    }
-  };
-
-  useEffect(() => {
-    if (selectedImageIndex !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [ selectedImageIndex ]);
-
   return (
-    <div>
-      <div className={ imageGridWrapperClass }>
+    <React.Fragment>
+      <div ref={ imageGridRef } className={ imageGridWrapperClass }>
         {images.map((src, index) => (
           <img
             key={ index }
@@ -64,42 +48,20 @@ export default function ImageGrid({ images }: ImageGridProps) {
             alt={ `Image ${ index + 1 }` }
             className={ imageGridItemClass }
             draggable="false"
-            onClick={ () => handleImageClick(index) }
+            onClick={ handleImageClick.bind(null, index) }
           />
         ))}
       </div>
 
-      {selectedImageIndex !== null && (
-        <div className="fixed inset-0 bg-white flex justify-center items-center max-w-md min-w-sm m-auto">
-          <button
-            onClick={ handleCloseModal }
-            className="absolute top-0 right-0 m-2"
-          >
-            <XMarkIcon className="size-8 text-gray-500" />
-          </button>
-          <button
-            onClick={ handlePrevImage }
-            className="absolute left-0 m-2"
-          >
-            <ChevronLeftIcon className="size-9 text-gray-500" />
-          </button>
-          <img
-            src={ images[selectedImageIndex] }
-            alt="Selected"
-            className="max-w-full max-h-full"
-            onClick={ handleCloseModal }
-            onTouchMove={ (e) => {
-              console.log('touch move', e);
-            } }
-          />
-          <button
-            onClick={ handleNextImage }
-            className="absolute right-0 m-2"
-          >
-            <ChevronRightIcon className="size-9 text-gray-500" />
-          </button>
-        </div>
-      )}
-    </div>
+      <Modal isOpen={ selectedImageIndex !== null } onClose={ handleCloseModal }>
+        <Slider dots={ true } infinite={ true } speed={ 500 } slidesToShow={ 1 } slidesToScroll={ 1 }>
+          {images.map((src, index) => (
+            <div key={ index }>
+              <img src={ src } alt={ `Image ${ index + 1 }` } />
+            </div>
+          ))}
+        </Slider>
+      </Modal>
+    </React.Fragment>
   );
 }
