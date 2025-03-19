@@ -51,14 +51,15 @@ export default function ImageGrid({ images }: ImageGridProps) {
       <div ref={ imageGridRef } className={ imageGridWrapperClass }>
         {
           images.map((src, index) => (
-            <img
-              key={ index }
-              src={ src }
-              alt={ `Image ${ index }` }
-              className={ imageGridItemClass }
-              draggable="false"
-              onClick={ handleImageClick.bind(null, index) }
-            />
+            <div key={ index } className="flex items-center justify-center w-full h-auto">
+              <img
+                src={ src }
+                alt={ `Image ${ index }` }
+                className={ imageGridItemClass }
+                draggable="false"
+                onClick={ handleImageClick.bind(null, index) }
+              />
+            </div>
           ))
         }
       </div>
@@ -73,11 +74,13 @@ export default function ImageGrid({ images }: ImageGridProps) {
           slidesToShow={ 1 }
           slidesToScroll={ 1 }
         >
-          {images.map((src, index) => (
-            <div key={ index }>
-              <img src={ src } alt={ `Image ${ index }` } />
-            </div>
-          ))}
+          {
+            images.map((src, index) => (
+              <div key={ index }>
+                <img src={ src } alt={ `Image ${ index }` } />
+              </div>
+            ))
+          }
         </Slider>
       </Modal>
     </React.Fragment>

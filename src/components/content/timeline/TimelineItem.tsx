@@ -23,7 +23,7 @@ export default function TimelineItem({ data, reverse }: TimelineItemProps) {
     <div
       className={ timelineImageWrapperClass }
       style={ {
-        gridTemplateColumns: '1fr 3px 1fr',
+        gridTemplateColumns: '1fr 1px 1fr',
         gridAutoRows: '160px',
         alignItems: 'center',
         justifyItems: 'center'
@@ -34,13 +34,13 @@ export default function TimelineItem({ data, reverse }: TimelineItemProps) {
           {(reverse ? index % 2 !== 0 : index % 2 === 0) ? (
             <>
               <TimelineImage imgPath={ item.imgPath || '' } />
-              <TimelineConnector />
+              <TimelineConnector dotColor="#FCA5A5" />
               <TimelineText date={ item.date } text={ item.text } />
             </>
           ) : (
             <>
               <TimelineText date={ item.date } text={ item.text } />
-              <TimelineConnector />
+              <TimelineConnector dotColor="#FCA5A5" />
               <TimelineImage imgPath={ item.imgPath || '' } />
             </>
           )}
