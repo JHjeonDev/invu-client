@@ -74,11 +74,13 @@ export default function ImageGrid({ images }: ImageGridProps) {
           slidesToShow={ 1 }
           slidesToScroll={ 1 }
         >
-          {images.map((src, index) => (
-            <div key={ index }>
-              <img src={ src } alt={ `Image ${ index }` } />
-            </div>
-          ))}
+          {
+            images.map((src, index) => (
+              <div key={ index }>
+                <img src={ src } alt={ `Image ${ index }` } />
+              </div>
+            ))
+          }
         </Slider>
       </Modal>
     </React.Fragment>

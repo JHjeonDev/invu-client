@@ -10,7 +10,7 @@ export default function TimelineConnector({ bgColor = '#E5E5E5', dotColor = '#00
       style={ { backgroundColor: bgColor } }
     >
       <div
-        className="absolute w-[7px] h-[7px] rounded-full left-[-2px] top-1/2"
+        className="absolute w-[7px] h-[7px] rounded-full left-[-3px] top-1/2"
         style={ { backgroundColor: dotColor } }
       />
     </div>
