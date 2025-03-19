@@ -8,7 +8,7 @@ type ModalProps = {
   title?: string;
   children: React.ReactNode;
   isOpen: boolean;
-  animationType?: undefined | 'fade' | 'slide';
+  animationType?: undefined | 'fade' | 'slide' | 'scale';
   onClose: () => void;
 };
 
@@ -32,16 +32,23 @@ const modalBodyClass = twMerge(
   'pt-4'
 );
 
-const getAnimationType = (type: undefined | 'fade' | 'slide', isOpen: boolean) => {
+const getAnimationType = (type: undefined | 'fade' | 'slide' | 'scale', isOpen: boolean) => {
+  let animationClass = '';
+
   if (type === 'slide') {
-    return isOpen ? 'translate-y-[0%]' : 'translate-y-[-100%]';
+    animationClass = isOpen ? 'translate-y-[0%]' : 'translate-y-[-100%]';
   }
 
-  return '';
+  if (type === 'scale') {
+    animationClass = isOpen ? 'scale-100' : 'scale-95';
+  }
+
+  const opacityClass = type ? (isOpen ? 'opacity-100' : 'opacity-0') : '';
+
+  return `${ animationClass } ${ opacityClass }`;
 };
 
 export default function Modal({ title, children, isOpen, animationType = undefined, onClose }: ModalProps): JSX.Element {
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
