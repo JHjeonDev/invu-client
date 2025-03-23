@@ -18,10 +18,11 @@ export default function ScrollWrapper({ children, className }: ScrollWrapperProp
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
+  }, []);
 
+  useEffect(() => {
     const handleScroll = () => {
       if (isTransitioning) {
-        // 트랜지션 중에는 스크롤 위치 고정
         window.scrollTo(0, isInitialized ? 0 : 51);
         return;
       }
@@ -29,30 +30,20 @@ export default function ScrollWrapper({ children, className }: ScrollWrapperProp
       if (window.scrollY > 50 && isInitialized) {
         setIsTransitioning(true);
         setIsInitialized(false);
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 400); // transition duration
+        setTimeout(() => setIsTransitioning(false), 400);
       } else if (window.scrollY <= 50 && !isInitialized) {
         setIsTransitioning(true);
         setIsInitialized(true);
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 400);
+        setTimeout(() => setIsTransitioning(false), 400);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [ isInitialized, isTransitioning, setIsInitialized ]);
+  }, [ isInitialized, isTransitioning ]);
 
-  // 트랜지션 중 스크롤 방지
   useEffect(() => {
-    if (isTransitioning) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
+    document.body.style.overflow = isTransitioning ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
@@ -60,7 +51,7 @@ export default function ScrollWrapper({ children, className }: ScrollWrapperProp
 
   return (
     <div
-      className={ scrollWrapperClass }
+      className={ twMerge(scrollWrapperClass, className) }
       style={ {
         opacity: isInitialized ? 0 : 1
       } }
