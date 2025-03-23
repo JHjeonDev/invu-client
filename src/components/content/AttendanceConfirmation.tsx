@@ -8,9 +8,8 @@ import RadioSelector from '../selector/RadioSelector';
 import DateText from '../text/DateText';
 import InputText from '../text/InputText';
 import TitleText from '../text/TitleText';
-
+import Wrapper from './Wrapper';
 const modalWrapperClass = twMerge(
-  'flex flex-col items-center w-full max-w-md min-w-sm',
   'my-10',
   'z-50',
   'whitespace-pre-line'
@@ -57,7 +56,7 @@ export default function AttendanceConfirmation({ inviteCode }: AttendanceConfirm
   };
 
   return (
-    <div className={ modalWrapperClass }>
+    <Wrapper className={ modalWrapperClass }>
       <TitleText className="text-lg" text={ data.title } />
       <div className="my-5 whitespace-pre-line text-center">
         { data.text }
@@ -82,6 +81,6 @@ export default function AttendanceConfirmation({ inviteCode }: AttendanceConfirm
           </button>
         </div>
       </Modal>
-    </div>
+    </Wrapper>
   );
 }

@@ -1,3 +1,4 @@
+import Wrapper from '@/components/content/Wrapper';
 import DdayCounterComponent from '@/components/content/ddaycounter/DdayCounterComponent';
 import { parseTargetDate } from '@/utils/date';
 
@@ -15,7 +16,7 @@ export default function DdayCounter({ data }: DdayCounterProps) {
   const targetDate = parseTargetDate(data.targetDate);
 
   return (
-    <div className="py-12 px-4">
+    <Wrapper className="py-10 px-4">
       <DdayCounterComponent
         targetDate={ targetDate }
         title={ data.title }
@@ -23,7 +24,7 @@ export default function DdayCounter({ data }: DdayCounterProps) {
         bottomMessage={ data.bottomMessage }
         showTimeDisplay={ data.showTimeDisplay }
       />
-    </div>
+    </Wrapper>
   );
 
 }
