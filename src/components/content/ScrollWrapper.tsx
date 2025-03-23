@@ -2,6 +2,7 @@
 
 import { usePageEntryStore } from '@/stores/pageEntry';
 import { twMerge } from 'tailwind-merge';
+import { useEffect, useState } from 'react';
 
 const scrollWrapperClass = twMerge(
   'transition duration-400',
@@ -14,17 +15,50 @@ type ScrollWrapperProps = {
 }
 
 export default function ScrollWrapper({ children, className }: ScrollWrapperProps) {
-  const { isInitialized } = usePageEntryStore(state => state);
+  const { isInitialized, setIsInitialized } = usePageEntryStore(state => state);
+  const [ isTransitioning, setIsTransitioning ] = useState(false);
 
-  // useEffect(() => {
-  //   if (isInitialized && window.scrollY < 50) {
-  //     console.log('scroll to 50');
-  //     window.scrollTo(0, 51);
-  //   } else if (!isInitialized && window.scrollY > 50) {
-  //     console.log('scroll to 0');
-  //     window.scrollTo(0, 0);
-  //   }
-  // }, [ isInitialized ]);
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+
+    const handleScroll = () => {
+      if (isTransitioning) {
+        // 트랜지션 중에는 스크롤 위치 고정
+        window.scrollTo(0, isInitialized ? 0 : 51);
+        return;
+      }
+
+      if (window.scrollY > 50 && isInitialized) {
+        setIsTransitioning(true);
+        setIsInitialized(false);
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 400); // transition duration
+      } else if (window.scrollY <= 50 && !isInitialized) {
+        setIsTransitioning(true);
+        setIsInitialized(true);
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 400);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [ isInitialized, isTransitioning, setIsInitialized ]);
+
+  // 트랜지션 중 스크롤 방지
+  useEffect(() => {
+    if (isTransitioning) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [ isTransitioning ]);
 
   return (
     <div
