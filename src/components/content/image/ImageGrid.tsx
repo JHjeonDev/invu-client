@@ -10,8 +10,8 @@ import { intersectionAnimation, intersectionAnimationOptions } from '@/utils/con
 import { useIntersectionObserver } from '@/utils/customHook';
 import Slider from 'react-slick';
 
+import Wrapper from '@/components/content/Wrapper';
 import './imageGrid.css';
-
 type ImageGridProps = {
   images: string[];
 };
@@ -48,7 +48,7 @@ export default function ImageGrid({ images }: ImageGridProps) {
 
   return (
     <React.Fragment>
-      <div ref={ imageGridRef } className={ imageGridWrapperClass }>
+      <Wrapper ref={ imageGridRef } className={ imageGridWrapperClass }>
         {
           images.map((src, index) => (
             <div key={ index } className="flex items-center justify-center w-full h-auto">
@@ -62,7 +62,7 @@ export default function ImageGrid({ images }: ImageGridProps) {
             </div>
           ))
         }
-      </div>
+      </Wrapper>
 
       <Modal isOpen={ selectedImageIndex !== null } onClose={ handleCloseModal }>
         <Slider

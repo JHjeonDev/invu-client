@@ -1,10 +1,11 @@
 import { twMerge } from 'tailwind-merge';
 
+import Wrapper from '@/components/content/Wrapper';
 import TitleText from '@/components/text/TitleText';
 
 const mainWrapperClass = twMerge(
-  'flex flex-col items-center w-full max-w-md h-full',
-  'py-16'
+  'pt-16',
+  'pb-10'
 );
 
 type MainProps = {
@@ -13,7 +14,7 @@ type MainProps = {
 
 export default function Main({ data }: MainProps) {
   return (
-    <div className={ mainWrapperClass }>
+    <Wrapper className={ mainWrapperClass }>
       <TitleText text={ data.title } />
       {
         data.imgPath && (
@@ -32,6 +33,6 @@ export default function Main({ data }: MainProps) {
           </div>
         )
       }
-    </div>
+    </Wrapper>
   );
 }

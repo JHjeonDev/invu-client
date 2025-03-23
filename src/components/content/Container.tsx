@@ -10,6 +10,7 @@ import Intro from './Intro';
 import ScrollWrapper from './ScrollWrapper';
 import ScrollUpCover from './cover/ScrollUpCover';
 import ImageGrid from './image/ImageGrid';
+import RouteMap from './map/RouteMap';
 import Timeline from './timeline/Timeline';
 
 type ContainerProps = {
@@ -75,6 +76,24 @@ export default async function Container({ inviteCode = '' }: ContainerProps) {
     '/images/vertical-image-01.jpeg'
   ];
 
+  const routeMapData = {
+    title: '오시는 길',
+    content: {
+      mapTitle: '오시는 길',
+      location: '경기 용인시 처인구 양지면 주북로235번길 78, 78-1',
+      routeDescription: [
+        {
+          title: '자가용 이용시',
+          description: '자가용 이용시의 경로'
+        },
+        {
+          title: '대중교통 이용시',
+          description: '대중교통 이용시의 경로'
+        }
+      ]
+    }
+  };
+
   return (
     <React.Fragment key={ `${ inviteCode }-${ Math.floor(Math.random() * 10000) }` }>
       <ScrollUpCover data={ coverData.content } />
@@ -82,6 +101,7 @@ export default async function Container({ inviteCode = '' }: ContainerProps) {
         { renderContent(invitationData) }
         <ImageGrid images={ imageGridData } />
         <AttendanceConfirmation inviteCode={ inviteCode } />
+        <RouteMap data={ routeMapData } />
       </ScrollWrapper>
     </React.Fragment>
   );

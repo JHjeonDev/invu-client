@@ -18,5 +18,5 @@ export default function TimelineImage({ imgPath }: TimelineImageProps) {
     <figure ref={ ref } className="relative h-[140px] w-[80%]">
       <img src={ imgPath } alt="Timeline Image" className="object-contain w-full h-full" />
     </figure>
-  );
+  ); 
 }
