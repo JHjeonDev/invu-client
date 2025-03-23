@@ -4,8 +4,7 @@ import TitleText from '@/components/text/TitleText';
 
 const mainWrapperClass = twMerge(
   'flex flex-col items-center w-full max-w-md h-full',
-  'py-16',
-  'mt-20'
+  'py-16'
 );
 
 type MainProps = {

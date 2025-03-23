@@ -1,12 +1,10 @@
 'use client';
 
 import { usePageEntryStore } from '@/stores/pageEntry';
-import { twMerge } from 'tailwind-merge';
 import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const scrollWrapperClass = twMerge(
-  'transition duration-400',
-  'ease'
 );
 
 type ScrollWrapperProps = {
