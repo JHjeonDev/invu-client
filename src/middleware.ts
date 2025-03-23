@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  console.log(pathname);
   // /invite 경로와 / 경로가 아닌 경우 루트 페이지로 리다이렉트
   if (!pathname.startsWith('/invite') && pathname !== '/') {
     return NextResponse.redirect(new URL('/', request.url));

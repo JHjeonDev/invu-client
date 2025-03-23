@@ -5,6 +5,7 @@ import { request } from '@/utils/http';
 
 import DdayCounter from '@/components/content/DdayCounter';
 import Main from '../content/Main';
+import AttendanceConfirmation from './AttendanceConfirmation';
 import Intro from './Intro';
 import ScrollWrapper from './ScrollWrapper';
 import ScrollUpCover from './cover/ScrollUpCover';
@@ -15,8 +16,8 @@ type ContainerProps = {
   inviteCode?: string;
 };
 
-const requestInvitationData = async (inviteCode: string | undefined) => {
-  if (!inviteCode) return null;
+const requestInvitationData = async (inviteCode: string) => {
+  if (!inviteCode) return notFound();
 
   try {
     const api = `/api/v1/invitation/${ inviteCode }`;
@@ -25,7 +26,6 @@ const requestInvitationData = async (inviteCode: string | undefined) => {
     const data = await res.json();
     const jsonData = JSON.parse(data.data.invuJson);
 
-    console.log('jsonData', jsonData);
     return jsonData;
   } catch (error) {
     console.warn(error);
@@ -39,7 +39,6 @@ const renderContent = (data: any[]): React.ReactNode => {
     case 'intro':
       return <Intro />;
     case 'main':
-      console.log('item.content', item.content);
       return <Main data={ item.content } />;
     case 'timeline':
       return <Timeline data={ item } />;
@@ -51,7 +50,7 @@ const renderContent = (data: any[]): React.ReactNode => {
   });
 };
 
-export default async function Container({ inviteCode }: ContainerProps) {
+export default async function Container({ inviteCode = '' }: ContainerProps) {
   const invitationData = await requestInvitationData(inviteCode);
 
   await new Promise(resolve => setTimeout(resolve, 500));
@@ -82,6 +81,7 @@ export default async function Container({ inviteCode }: ContainerProps) {
       <ScrollWrapper>
         { renderContent(invitationData) }
         <ImageGrid images={ imageGridData } />
+        <AttendanceConfirmation inviteCode={ inviteCode } />
       </ScrollWrapper>
     </React.Fragment>
   );
