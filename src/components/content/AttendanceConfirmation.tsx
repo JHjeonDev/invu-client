@@ -24,13 +24,19 @@ type HandleSubmitProps = {
   name: string;
   companionCount: string;
   meal: string;
+  companionName: string;
   setIsModalOpen: (isModalOpen: boolean) => void;
 };
 
-const handleSubmit = async ({ inviteCode, name, companionCount, meal, setIsModalOpen }: HandleSubmitProps) => {
+const handleSubmit = async ({ inviteCode, name, companionCount, companionName, meal, setIsModalOpen }: HandleSubmitProps) => {
   const response = await request(`/api/v1/invitation/${ inviteCode }/guests`, {
     method: 'POST',
-    body: { name, companionCount, meal }
+    body: {
+      guestName: name,
+      attendCount: companionCount,
+      nameNotes: companionName,
+      status: meal
+    }
   });
 
   if (response.ok) {
@@ -76,7 +82,7 @@ export default function AttendanceConfirmation({ inviteCode }: AttendanceConfirm
             <InputText id="companionName" type="text" label="동행인" value={ companionName } placeholder="동행인 성함을 입력해 주세요." onChange={ setCompanionName } />
             <RadioSelector id="meal" label="식사여부" options={ [ { label: '예정', value: 'Y' }, { label: '안함', value: 'N' }, { label: '미정', value: 'U' } ] } onChange={ setMeal } />
           </div>
-          <button onClick={ handleSubmit.bind(null, { inviteCode, name, companionCount, meal, setIsModalOpen }) } type="submit" className="border border-[#FCA5A5] text-[#FCA5A5] px-14 py-2 my-5 rounded-md transition-all duration-300 hover:bg-[#FCA5A5] hover:text-white">
+          <button onClick={ handleSubmit.bind(null, { inviteCode, name, companionCount, companionName, meal, setIsModalOpen }) } type="submit" className="border border-[#FCA5A5] text-[#FCA5A5] px-14 py-2 my-5 rounded-md transition-all duration-300 hover:bg-[#FCA5A5] hover:text-white">
             전달하기
           </button>
         </div>
