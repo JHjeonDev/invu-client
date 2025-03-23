@@ -1,5 +1,3 @@
-'use client';
-
 import TitleText from '@/components/text/TitleText';
 import { twMerge } from 'tailwind-merge';
 import Wrapper from '../Wrapper';
