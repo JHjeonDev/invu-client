@@ -22,22 +22,7 @@ type CoverData = {
 };
 
 export default function ScrollUpCover({ data }: { data: CoverData }) {
-  const { isInitialized, setIsInitialized } = usePageEntryStore(state => state);
-
-  useEffect(() => {
-    window.history.scrollRestoration = 'manual';
-
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsInitialized(false);
-      } else {
-        setIsInitialized(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { isInitialized } = usePageEntryStore(state => state);
 
   return (
     <div
