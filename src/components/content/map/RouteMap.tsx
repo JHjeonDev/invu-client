@@ -3,19 +3,10 @@
 import TitleText from '@/components/text/TitleText';
 import { twMerge } from 'tailwind-merge';
 import Wrapper from '../Wrapper';
+import Map from './Map';
 
 const routeMapWrapperClass = twMerge(
 
-);
-
-const routeMapDescriptionTitleClass = twMerge(
-  'text-left',
-  'w-full',
-  'h-[300px]',
-  'flex',
-  'items-center',
-  'justify-center',
-  'bg-gray-200'
 );
 
 const routeMapDescriptionWrapperClass = twMerge(
@@ -43,7 +34,7 @@ export default function RouteMap({ data }: RouteMapProps) {
   return (
     <Wrapper className={ routeMapWrapperClass }>
       <TitleText text={ data.title } />
-      <div className={ routeMapDescriptionTitleClass }>RouteMap</div>
+      <Map location={ data.content.location } />
       <div className={ routeMapDescriptionWrapperClass }>
         <div>
           <div>주소</div>
