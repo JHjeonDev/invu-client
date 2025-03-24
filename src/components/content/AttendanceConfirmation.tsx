@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { request } from '../../utils/http';
-import Modal from '../modal/Modal';
-import RadioSelector from '../selector/RadioSelector';
-import DateText from '../text/DateText';
-import InputText from '../text/InputText';
-import TitleText from '../text/TitleText';
+import Modal from '../fragments/modal/Modal';
+import RadioSelector from '../fragments/selector/RadioSelector';
+import DateText from '../fragments/text/DateText';
+import InputText from '../fragments/text/InputText';
+import TitleText from '../fragments/text/TitleText';
 import Wrapper from './Wrapper';
 const modalWrapperClass = twMerge(
   'my-10',
