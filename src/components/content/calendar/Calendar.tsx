@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 
 type CalendarProps = {
   date: string;
-  startOfWeek: 'monday' | 'sunday';
+  startOfWeek?: 'monday' | 'sunday';
 };
 
 const WEEKDAYS = {
