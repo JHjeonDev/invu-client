@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import TitleText from '@/components/text/TitleText';
+import TitleText from '@/components/fragments/text/TitleText';
 import { twMerge } from 'tailwind-merge';
 import Wrapper from '../Wrapper';
 import KakaoMap from './KakaoMap';
