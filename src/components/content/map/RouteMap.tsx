@@ -16,7 +16,6 @@ const routeMapDescriptionWrapperClass = twMerge(
     'flex flex-col gap-4 text-left w-full p-10'
 );
 
-
 type RouteMapProps = {
   data: {
     title: string;
